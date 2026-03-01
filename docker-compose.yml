@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   cups:
-    image: dtsypkin/openprinting-cups-docker:latest
+    image: ghcr.io/dtsypkin/openprinting-cups-docker:latest
     container_name: cups-server
     restart: unless-stopped
     ports:
