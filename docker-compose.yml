@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  cups:
+    image: dtsypkin/openprinting-cups-docker:latest
+    container_name: cups-server
+    restart: unless-stopped
+    ports:
+      - "631:631"
+    volumes:
+      - cups_config:/etc/cups
+      - cups_spool:/var/spool/cups # if you have ssd, this vould be ideal for spool
+      
+    devices:
+      - /dev/bus/usb:/dev/bus/usb # use it for a usb-connected printer, otherwise comment      
+
+volumes:
+  cups_config:
+  cups_spool:
