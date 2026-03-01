@@ -6,7 +6,7 @@ This repository doesn't just host a `Dockerfile`. It uses a "smart polling" GitH
 
 ## ✨ Features
 
-* **Always Up-to-Date:** The GitHub Actions workflow checks for new upstream releases daily. If a new version is detected, it builds and pushes a new image automatically.
+* **Always Up-to-Date:** The GitHub Actions workflow checks for new upstream releases every 3 hours. If a new version is detected, it builds and pushes a new image automatically.
 * **Multi-Architecture:** Built for both `linux/amd64` (standard PCs/servers) and `linux/arm64` (perfect for ARM-based boards like Raspberry Pi).
 * **Portainer & Watchtower Ready:** Designed to be easily deployed via Docker Compose and seamlessly updated in the background using Watchtower.
 * **Pre-configured Web UI Access:** Comes with a default admin user and pre-configured network settings to allow remote access to the CUPS Web Interface right out of the box.
@@ -62,9 +62,9 @@ If you are using a physical printer connected via a USB cable, ensure the printe
 
 ## 🔄 How the Automation Works
 
-1. A scheduled cron job in GitHub Actions runs daily.
+1. A scheduled cron job in GitHub Actions runs every 3 hours.
 2. It queries the GitHub API for the latest release tag of `OpenPrinting/cups`.
-3. It checks your GitHub Container Registry (GHCR) to see if an image with this tag already exists.
+3. It checks this GitHub Container Registry (GHCR) to see if an image with this tag already exists.
 4. If the tag is new, it triggers a multi-architecture `buildx` process using QEMU, compiling the CUPS source code from scratch.
 5. The new image is pushed to GHCR, updating the `latest` tag.
 6. If you have Watchtower running in your home lab, it will detect the updated `latest` tag and seamlessly recreate your local container.
