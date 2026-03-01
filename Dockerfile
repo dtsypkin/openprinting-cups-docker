@@ -14,7 +14,8 @@ RUN apt-get update -y && apt-get upgrade --fix-missing -y && \
     openssl sudo git \
     && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/OpenPrinting/cups.git .
+ARG CUPS_VERSION=master
+RUN git clone -b ${CUPS_VERSION} --depth 1 https://github.com/OpenPrinting/cups.git .
 
 RUN ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var && \
     make clean && make && make install
