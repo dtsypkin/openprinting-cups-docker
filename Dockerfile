@@ -19,7 +19,8 @@ RUN git clone https://github.com/OpenPrinting/cups.git .
 RUN ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var && \
     make clean && make && make install
 
-RUN useradd -G sudo,lpadmin -m -d /home/admin -s /bin/bash admin && \
+RUN groupadd lpadmin && \
+    useradd -G sudo,lpadmin -m -d /home/admin -s /bin/bash admin && \
     echo "admin:admin" | chpasswd
 
 RUN sed -i 's/Listen localhost:631/Port 631/' /etc/cups/cupsd.conf && \
